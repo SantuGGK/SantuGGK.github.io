@@ -1,0 +1,39 @@
+<div class="main-div">
+    <mat-card class="main-content">
+        <div class="mat-card-cvr">
+            <mat-card-title>Login</mat-card-title>
+            <div *ngIf="invalidCreds" class="alert alert-danger " role="alert"><b>Uh
+                    Oh</b><br>We could not find the account with the entered credentials. Check the form and try
+                again.</div>
+            <mat-card-content fxLayoutAlign="center">
+
+                <form class="form">
+                    <table class="table-view" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <label for="email">User Name</label>
+                                    <input matInput placeholder="Username" [(ngModel)]="username" name="username"
+                                        required>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><mat-form-field class="form-field">
+                                    <label for="password">Password</label>
+                                    <input matInput placeholder="Password" [(ngModel)]="password" type="password"
+                                        name="password" required>
+                                </mat-form-field></td>
+                        </tr>
+                    </table>
+                </form>
+                <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
+
+            </mat-card-content>
+
+        </div>
+        <mat-card-actions>
+            <button mat-raised-button (click)="login()" color="primary">Login</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
