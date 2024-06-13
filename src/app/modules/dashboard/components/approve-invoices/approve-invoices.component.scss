@@ -1,4 +1,40 @@
+.header-sec {
+    background-color: #f4f4f4;
+
+    .header-content>h2 {
+        color: #3f51b5 !important;
+    }
+}
+
 table {
     width: 100%;
-  }
-  
+    th.mat-header-cell {
+        font-size: 14px;
+        font-weight: 500;
+        color: #000;
+    }
+
+    td {
+        .approve {
+            margin-right: 10px;
+            color: #008000;
+        }
+
+        .reject {
+            color: #ff0000;
+        }
+        input{
+            border: none;
+        }
+    }
+}
+
+.invoice-img{
+    text-align: center;
+    .invoice{
+        text-align: left !important;
+    }
+    img{
+        width: 60%;
+    }
+}
