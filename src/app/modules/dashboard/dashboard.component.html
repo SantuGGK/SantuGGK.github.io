@@ -1,8 +1,10 @@
 <mat-toolbar color="primary" class="">
     <button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
-    <span class="fill-remaining-space">AP Portal Automation</span>
+    <span class="fill-remaining-space">AP Automation</span>
+    <img class="site-log" src="/assets/images/pem-white.png" alt="image">
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
+        <!-- <mat-icon>more_vert</mat-icon> -->
+        <span>Admin</span>
     </button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="onLogout()">
@@ -15,6 +17,10 @@
     <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
         (mouseleave)="mouseleave()">
         <mat-nav-list>
+            <mat-list-item routerLink="/reports" [routerLinkActive]="['is-active']">
+                <span class="full-width" *ngIf="isExpanded || isShowing">Dashboard</span>
+                <mat-icon mat-list-icon>dashboard</mat-icon>
+            </mat-list-item>
             <mat-list-item routerLink="/approve-invoice" [routerLinkActive]="['is-active']">
                 <span class="full-width" *ngIf="isExpanded || isShowing">Approve Invoices</span>
                 <mat-icon mat-list-icon>check_circle</mat-icon>
@@ -22,10 +28,6 @@
             <mat-list-item routerLink="/invoice-correction" [routerLinkActive]="['is-active']">
                 <span class="full-width" *ngIf="isExpanded || isShowing">Invoices Correction</span>
                 <mat-icon mat-list-icon>bug_report</mat-icon>
-            </mat-list-item>
-            <mat-list-item routerLink="/reports" [routerLinkActive]="['is-active']">
-                <span class="full-width" *ngIf="isExpanded || isShowing">Dashboard</span>
-                <mat-icon mat-list-icon>dashboard</mat-icon>
             </mat-list-item>
         </mat-nav-list>
         <mat-nav-list>
