@@ -1,17 +1,34 @@
 .header-sec {
     background-color: #f4f4f4;
 
-    .header-content>h2 {
-        color: #3f51b5 !important;
+    .header-content {
+        display: flex;
+        height: 32px;
+        justify-content: space-between;
+
+        &>h2 {
+            color: #3f51b5 !important;
+        }
     }
 }
 
 table {
     width: 100%;
+
     th.mat-header-cell {
         font-size: 14px;
         font-weight: 500;
         color: #000;
+    }
+
+    tr {
+        &.no-data {
+            text-align: center;
+        }
+
+        &.blue {
+            background-color: #dae2f9;
+        }
     }
 
     td {
@@ -23,18 +40,33 @@ table {
         .reject {
             color: #ff0000;
         }
-        input{
+
+        input {
             border: none;
+
+            &.editable-fields {
+                width: 105px;
+                height: 30px;
+            }
         }
     }
 }
 
-.invoice-img{
+.invoice-img {
     text-align: center;
-    .invoice{
+
+    .invoice {
         text-align: left !important;
     }
-    img{
+
+    img {
         width: 60%;
     }
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
 }
