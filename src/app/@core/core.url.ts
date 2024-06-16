@@ -10,6 +10,6 @@ export class CoreUrl {
    * pageUrl stored all the routes related to application
    */
   public static readonly pageUrl = class {
-    public static readonly HOME_PAGE: string = '/reports';
+    public static readonly HOME_PAGE: string = '/approve-invoice';
   };
 }
