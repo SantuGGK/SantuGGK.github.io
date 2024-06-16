@@ -16,7 +16,7 @@ export function loadDashboardModule() {
 
 const routes: Routes = [
   { path: '', component: LoginComponent, data: { routeName: "Login" } },
-  { path: 'report', loadChildren: loadDashboardModule,},
+  { path: 'report', loadChildren: loadDashboardModule }
 ];
 
 @NgModule({
