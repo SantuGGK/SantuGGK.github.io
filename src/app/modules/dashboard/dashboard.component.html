@@ -17,6 +17,10 @@
     <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
         (mouseleave)="mouseleave()">
         <mat-nav-list>
+            <mat-list-item routerLink="/report" [routerLinkActive]="['is-active']">
+                <span class="full-width" *ngIf="isExpanded || isShowing">Dashboard</span>
+                <mat-icon mat-list-icon>dashboard</mat-icon>
+            </mat-list-item>
             <mat-list-item routerLink="/approve-invoice" [routerLinkActive]="['is-active']">
                 <span class="full-width" *ngIf="isExpanded || isShowing">Approve Invoices</span>
                 <mat-icon mat-list-icon>check_circle</mat-icon>
@@ -24,10 +28,6 @@
             <mat-list-item routerLink="/invoice-correction" [routerLinkActive]="['is-active']">
                 <span class="full-width" *ngIf="isExpanded || isShowing">Invoices Correction</span>
                 <mat-icon mat-list-icon>bug_report</mat-icon>
-            </mat-list-item>
-            <mat-list-item routerLink="/reports" [routerLinkActive]="['is-active']">
-                <span class="full-width" *ngIf="isExpanded || isShowing">Dashboard</span>
-                <mat-icon mat-list-icon>dashboard</mat-icon>
             </mat-list-item>
         </mat-nav-list>
         <mat-nav-list>
