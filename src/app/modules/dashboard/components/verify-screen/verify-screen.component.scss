@@ -1,0 +1,59 @@
+mat-grid-tile {
+  background: #f4f4f4;
+}
+
+
+
+.invoice-img {
+  text-align: center;
+  margin-top: 50px;
+
+  .invoice {
+    text-align: left !important;
+  }
+
+  img {
+    width: 600px;
+    height: 600px;
+  }
+}
+
+.invoice-data {
+  height: 100%;
+  width: 100%;
+  margin-top: 200px;
+  display: grid;
+  .approve, .reject {
+    float: right;
+  } 
+
+  .approve {
+    margin-right: 10px;
+    color: #008000;
+  }
+
+  .reject {
+    color: #ff0000;
+  }
+
+  form{
+    height: 750px;
+  }
+
+  table {
+    td {
+      margin-right: 25px;
+      margin-top: 60px;
+      display: inline-grid;
+
+      >input {
+        height: 40px;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.grid-header{
+  font-size: 20px;
+}

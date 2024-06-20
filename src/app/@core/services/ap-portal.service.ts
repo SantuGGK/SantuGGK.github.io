@@ -19,6 +19,14 @@ export class ApPortalService {
   }
 
   /**
+    * method to get invoice data
+    * @returns data as observable
+    */
+  public getInvoiceData(id:number): Observable<any> {
+    return this._httpClient.get(`https://api-generator.retool.com/RVfR1t/apinvoice/${id}`);
+  }
+
+  /**
     * method to update invoice details
     * @returns data as observable
     */

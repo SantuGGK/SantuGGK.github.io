@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '@app/shared/dialog-box/dialog-box.component';
 import { concat } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-approve-invoices',
@@ -24,7 +25,7 @@ export class ApproveInvoicesComponent implements OnInit {
 
   public selectedscreen = window.location.pathname === '/invoice-correction'
 
-  constructor(private _apPortalService: ApPortalService, private _dialog: MatDialog) {
+  constructor(private _apPortalService: ApPortalService, private _dialog: MatDialog, private _router: Router) {
     this.displayedColumns = ['modification'];
     this.columns = [];
     this.selectedRowImg = -1
@@ -63,6 +64,8 @@ export class ApproveInvoicesComponent implements OnInit {
   getRecord(row: any, index: number) {
     this.selectedRowImg = row?.id
     this.cindex = index
+    this.selectedscreen ? this._router.navigate(["/invoice-correction/verify-screen", row?.id]) :
+      this._router.navigate(["/approve-invoice/verify-screen", row?.id])
   }
   openDialog(e: any, isApproved: boolean) {
     let data = {

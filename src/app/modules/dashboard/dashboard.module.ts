@@ -7,6 +7,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { ApproveInvoicesComponent } from './components/approve-invoices/approve-invoices.component';
 import { InvoicesCorrectionComponent } from './components/invoices-correction/invoices-correction.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { VerifyScreenComponent } from './components/verify-screen/verify-screen.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ReportsComponent } from './components/reports/reports.component';
     DashboardComponent,
     ApproveInvoicesComponent,
     InvoicesCorrectionComponent,
-    ReportsComponent
+    ReportsComponent,
+    VerifyScreenComponent
   ],
   imports: [
     CommonModule,

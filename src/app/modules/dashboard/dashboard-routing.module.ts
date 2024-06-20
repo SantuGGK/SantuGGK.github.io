@@ -4,6 +4,7 @@ import { ApproveInvoicesComponent } from './components/approve-invoices/approve-
 import { DashboardComponent } from './dashboard.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { InvoicesCorrectionComponent } from './components/invoices-correction/invoices-correction.component';
+import { VerifyScreenComponent } from './components/verify-screen/verify-screen.component';
 
 const routes: Routes = [
   {
@@ -11,8 +12,18 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: '', component: ReportsComponent },
-      { path: 'approve-invoice', component: ApproveInvoicesComponent },
-      { path: 'invoice-correction', component: ApproveInvoicesComponent },
+      {
+        path: 'approve-invoice', children: [
+          { path: '', component: ApproveInvoicesComponent },
+          { path: 'verify-screen/:id', component: VerifyScreenComponent },
+        ]
+      },
+      {
+        path: 'invoice-correction', children: [
+          { path: '', component: ApproveInvoicesComponent },
+          { path: 'verify-screen/:id', component: VerifyScreenComponent },
+        ]
+      }
     ]
   }
 ];

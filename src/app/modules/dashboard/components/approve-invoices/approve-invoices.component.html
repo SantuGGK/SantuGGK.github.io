@@ -21,10 +21,8 @@
 
         <ng-container matColumnDef="modification">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();">
-                <button  *ngIf="!selectedscreen" class="approve" (click)="openDialog(element, true)">Approve</button>
-                <button  *ngIf="selectedscreen" class="approve" (click)="openDialog(element, true)">Submit</button>
-                <button *ngIf="!selectedscreen" class="reject" (click)="openDialog(element, false)">Reject</button>
+            <td mat-cell *matCellDef="let element">
+                <mat-icon class="approve" >arrow_right_alt</mat-icon>
             </td>
         </ng-container>
 

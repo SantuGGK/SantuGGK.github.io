@@ -1,0 +1,13 @@
+.header-sec {
+    background-color: #f4f4f4;
+
+    .header-content {
+        display: flex;
+        height: 32px;
+        justify-content: space-between;
+
+        &>h2 {
+            color: #3f51b5 !important;
+        }
+    }
+}
