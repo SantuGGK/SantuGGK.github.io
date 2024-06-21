@@ -4,6 +4,8 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { ApPortalService } from '@app/@core/services/ap-portal.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '@app/shared/dialog-box/dialog-box.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { forkJoin, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-verify-screen',
@@ -29,11 +31,17 @@ export class VerifyScreenComponent implements OnInit {
   });
   public selectedscreen = window.location.pathname
   public isCorrectionScreen = this.selectedscreen.split('/')[1] === 'invoice-correction'
-
+  dataSource: any;
+  displayedColumns: string[]
+  columns: string[]
+  cindex: number;
 
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _formBuilder: FormBuilder,
     private _apPortalService: ApPortalService, private _dialog: MatDialog) {
     this.selectedRowImg = -1
+    this.displayedColumns = [];
+    this.columns = [];
+    this.cindex = -1
   }
 
   ngOnInit(): void {
@@ -41,9 +49,18 @@ export class VerifyScreenComponent implements OnInit {
       this.selectedRowImg = params['id'];
     });
     this.getInvoiceDetails()
+    this.getColumns().then((cols: any) => {
+      this.displayedColumns.unshift(...cols);
+      this.columns = cols;
+    });
   }
 
   getInvoiceDetails() {
+    this.getInvoiceData();
+    this.getInvoiceLineItems();
+  }
+
+  getInvoiceData() {
     this._apPortalService.getInvoiceData(this.selectedRowImg).subscribe({
       next: (data) => {
         this.form.patchValue({
@@ -64,6 +81,21 @@ export class VerifyScreenComponent implements OnInit {
     })
   }
 
+  getInvoiceLineItems() {
+    this._apPortalService.getInvoiceLineItems(this.selectedRowImg).subscribe({
+      next: (data) => {
+        this.dataSource = new MatTableDataSource(data)
+      }
+    })
+  }
+
+  getColumns() {
+    /*assume this is an api*/
+    return new Promise((resolve, reject) => {
+      resolve(['Line Quantity', 'Line Amount', 'Invoice Number', 'Line Unit Price', 'Line Description']);
+    });
+  }
+
   submit(formData: any) {
     if (formData.status === "VALID") {
     }
@@ -82,7 +114,7 @@ export class VerifyScreenComponent implements OnInit {
       'Currency': this.form.value.currency,
       'Shipping Amount': this.form.value.shippingAmount,
       'Items': this.form.value.items,
-      'id':this.selectedRowImg
+      'id': this.selectedRowImg
     }
 
     let data = {
@@ -114,17 +146,29 @@ export class VerifyScreenComponent implements OnInit {
       data: data
     });
 
+    
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this._apPortalService.updateInvoiceDetails(payload).subscribe({
           next: () => {
-            let url = this.isCorrectionScreen? '/invoice-correction':'/approve-invoice'
-            this._router.navigate([url])
+            this.dataSource.filteredData.forEach((e:any) => {
+              this._apPortalService.updateInvoiceLineItems(e).subscribe({
+                next: () => {
+                  let url = this.isCorrectionScreen ? '/invoice-correction' : '/approve-invoice'
+                  this._router.navigate([url])
+                }
+              })      
+            });
           }
         })
       }
     });
 
+  }
+
+  getRecord(row: any, index: any) {
+    this.cindex = index
   }
 
 }

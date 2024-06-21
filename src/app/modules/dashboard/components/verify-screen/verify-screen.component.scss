@@ -23,9 +23,11 @@ mat-grid-tile {
   width: 100%;
   margin-top: 140px;
   display: grid;
-  .approve, .reject {
+
+  .approve,
+  .reject {
     float: right;
-  } 
+  }
 
   .approve {
     margin-right: 10px;
@@ -36,16 +38,40 @@ mat-grid-tile {
     color: #ff0000;
   }
 
-  form{
-    height: 750px;
+  form {
+    // margin-top: 50px;
   }
 
   table {
+    width: 100%;
+    margin-top: 50px;
+
+    &.field-sec {
+      display: inline-grid;
+      margin-top: 20px;
+
+      tr {
+        margin-top: 30px;
+        margin-left: 30px;
+      }
+    }
+
+    &.line-items {
+      width: 800px;
+
+      input {
+        border: none;
+        border-bottom: 1px solid;
+        gap: 1;
+        margin-right: 20px;
+      }
+    }
+
     td {
       margin-right: 25px;
       margin-top: 40px;
-      display: inline-grid;
 
+      // width: 100%;
       >input {
         height: 40px;
         margin-top: 10px;
@@ -54,6 +80,35 @@ mat-grid-tile {
   }
 }
 
-.grid-header{
+.grid-header {
   font-size: 20px;
+}
+
+.mat-tab-group {
+  min-height: 600px;
+}
+
+.submit-btn {
+  margin-right: 30px;
+}
+
+::ng-deep .mat-tab-body-content {
+  width: 650px !important;
+}
+
+::ng-deep mat-mdc-table {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+
+::ng-deep .mat-column-name {
+  height: 100px;
+}
+
+::ng-deep .mat-tab-body {
+  max-height: 460px;
+  overflow: auto;
+  overflow-x: auto;
+  overflow-y: scroll;
 }

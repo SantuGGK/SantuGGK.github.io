@@ -13,79 +13,112 @@
             <mat-grid-tile-header class="grid-header">
                 Field Details
             </mat-grid-tile-header>
+
             <div class="invoice-data">
                 <div class="submit-btn">
-                <button *ngIf="!isCorrectionScreen" class="reject" (click)="openDialog(false)">Reject</button>
-                <button *ngIf="isCorrectionScreen" class="approve" (click)="openDialog()">Submit</button>
-                <button *ngIf="!isCorrectionScreen" class="approve" (click)="openDialog(true)">Approve</button>
+                    <button *ngIf="!isCorrectionScreen" class="reject" (click)="openDialog(false)">Reject</button>
+                    <button *ngIf="isCorrectionScreen" class="approve" (click)="openDialog()">Submit</button>
+                    <button *ngIf="!isCorrectionScreen" class="approve" (click)="openDialog(true)">Approve</button>
+                </div>
+                <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+                    <mat-tab label="Fields">
+                        <form [formGroup]="form" (ngSubmit)="submit(form)">
+                            <table class="field-sec" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-label>Vendor Name</mat-label>
+                                        <input matInput formControlName="vendorName" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                    <td>
+                                        <mat-label>Invoice Number</mat-label>
+                                        <input matInput formControlName="invoiceNumber" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                    <td>
+                                        <mat-label>Invoice Date</mat-label>
+                                        <input matInput formControlName="invoiceDate" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-label>Due Date</mat-label>
+                                        <input matInput formControlName="dueDate" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                    <td>
+                                        <mat-label>Payment Terms</mat-label>
+                                        <input matInput formControlName="paymentTerms" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                    <td>
+                                        <mat-label>PO Number</mat-label>
+                                        <input matInput formControlName="poNumber" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-label>Net Amount</mat-label>
+                                        <input matInput formControlName="netAmount" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                    <td>
+                                        <mat-label>Total Amount</mat-label>
+                                        <input matInput formControlName="totalAmount" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                    <td>
+                                        <mat-label>Tax Amount</mat-label>
+                                        <input matInput formControlName="taxAmount" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-label>Currency</mat-label>
+                                        <input matInput formControlName="currency" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                    <td>
+                                        <mat-label>Shipping Amount</mat-label>
+                                        <input matInput formControlName="shippingAmount" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                    <td>
+                                        <mat-label>Items</mat-label>
+                                        <input matInput formControlName="items" class="form-control"
+                                            [readonly]="!isCorrectionScreen">
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </mat-tab>
+                    <mat-tab label="Line Items">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 line-items">
+                            <ng-container [matColumnDef]="column" *ngFor="let column of columns;index as i ">
+                                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <input class="editable-fields"  *ngIf="isCorrectionScreen" type="text" name="description"
+                                        [(ngModel)]="element[column]" [value]="element[column]">
+                                    <div *ngIf="!isCorrectionScreen">{{element[column]}}</div>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;let index = index"
+                                (click)="getRecord(row, index)" [class.blue]="index == cindex"></tr>
+                            <tr class="mat-row no-data" *matNoDataRow>
+                                <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                                    No data found.
+                                </td>
+                            </tr>
+
+                        </table>
+                    </mat-tab>
+                </mat-tab-group>
             </div>
-
-            <form [formGroup]="form" (ngSubmit)="submit(form)">
-                <table class="field-sec" cellspacing="0">
-                    <tr>
-                        <td>
-                            <mat-label>Vendor Name</mat-label>
-                            <input matInput formControlName="vendorName" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                        <td>
-                            <mat-label>Invoice Number</mat-label>
-                            <input matInput formControlName="invoiceNumber" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                        <td>
-                            <mat-label>Invoice Date</mat-label>
-                            <input matInput formControlName="invoiceDate" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <mat-label>Due Date</mat-label>
-                            <input matInput formControlName="dueDate" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                        <td>
-                            <mat-label>Payment Terms</mat-label>
-                            <input matInput formControlName="paymentTerms" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                        <td>
-                            <mat-label>PO Number</mat-label>
-                            <input matInput formControlName="poNumber" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <mat-label>Net Amount</mat-label>
-                            <input matInput formControlName="netAmount" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                        <td>
-                            <mat-label>Total Amount</mat-label>
-                            <input matInput formControlName="totalAmount" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                        <td>
-                            <mat-label>Tax Amount</mat-label>
-                            <input matInput formControlName="taxAmount" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <mat-label>Currency</mat-label>
-                            <input matInput formControlName="currency" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                        <td>
-                            <mat-label>Shipping Amount</mat-label>
-                            <input matInput formControlName="shippingAmount" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                        <td>
-                            <mat-label>Items</mat-label>
-                            <input matInput formControlName="items" class="form-control" [readonly]="!isCorrectionScreen">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-
         </mat-grid-tile>
     </mat-grid-list>
-
-
-
-
 </div>
