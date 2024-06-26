@@ -146,19 +146,19 @@ export class VerifyScreenComponent implements OnInit {
       data: data
     });
 
-    
+
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this._apPortalService.updateInvoiceDetails(payload).subscribe({
           next: () => {
-            this.dataSource.filteredData.forEach((e:any) => {
+            this.dataSource.filteredData.forEach((e: any) => {
               this._apPortalService.updateInvoiceLineItems(e).subscribe({
                 next: () => {
                   let url = this.isCorrectionScreen ? '/invoice-correction' : '/approve-invoice'
                   this._router.navigate([url])
                 }
-              })      
+              })
             });
           }
         })
@@ -169,6 +169,11 @@ export class VerifyScreenComponent implements OnInit {
 
   getRecord(row: any, index: any) {
     this.cindex = index
+  }
+
+  goBack() {
+    let url = this.isCorrectionScreen ? '/invoice-correction' : '/approve-invoice'
+    this._router.navigate([url])
   }
 
 }

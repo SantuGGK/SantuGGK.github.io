@@ -82,6 +82,9 @@ mat-grid-tile {
 
 .grid-header {
   font-size: 20px;
+  &.field-details{
+    justify-content: space-between;
+  }
 }
 
 .mat-tab-group {

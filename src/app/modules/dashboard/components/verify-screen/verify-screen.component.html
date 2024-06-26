@@ -10,10 +10,11 @@
             </div>
         </mat-grid-tile>
         <mat-grid-tile>
-            <mat-grid-tile-header class="grid-header">
-                Field Details
+            <mat-grid-tile-header class="grid-header field-details">
+                <span>Field Details</span>
+                <span (click)="goBack()"><mat-icon matTooltip="previous page"
+                    >keyboard_backspace</mat-icon></span>
             </mat-grid-tile-header>
-
             <div class="invoice-data">
                 <div class="submit-btn">
                     <button *ngIf="!isCorrectionScreen" class="reject" (click)="openDialog(false)">Reject</button>
@@ -100,8 +101,8 @@
                             <ng-container [matColumnDef]="column" *ngFor="let column of columns;index as i ">
                                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
                                 <td mat-cell *matCellDef="let element">
-                                    <input class="editable-fields"  *ngIf="isCorrectionScreen" type="text" name="description"
-                                        [(ngModel)]="element[column]" [value]="element[column]">
+                                    <input class="editable-fields" *ngIf="isCorrectionScreen" type="text"
+                                        name="description" [(ngModel)]="element[column]" [value]="element[column]">
                                     <div *ngIf="!isCorrectionScreen">{{element[column]}}</div>
                                 </td>
                             </ng-container>
